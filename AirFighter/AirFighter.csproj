@@ -8,4 +8,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="DirectionType.enum" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="DirectionType.enum" />
+  </ItemGroup>
+
 </Project>
