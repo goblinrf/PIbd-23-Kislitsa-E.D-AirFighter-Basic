@@ -11,7 +11,7 @@ namespace AirFighter
         /// <summary>
         /// Класс-сущность
         /// </summary>
-        public EntitySportCar? EntityAirFighter { get; private set; }
+        public EntityAirFighter? EntityAirFighter { get; private set; }
         /// <summary>
         /// Ширина окна
         /// </summary>
@@ -44,21 +44,21 @@ private int _startPosX;
         /// <param name="weight">Вес</param>
         /// <param name="bodyColor">Цвет кузова</param>
         /// <param name="additionalColor">Дополнительный цвет</param>
-        /// <param name="bodyKit">Признак наличия обвеса</param>
+        /// <param name="racket">Признак наличия обвеса</param>
         /// <param name="wing">Признак наличия антикрыла</param>
-        /// <param name="sportLine">Признак наличия гоночной полосы</param>
+      
         /// <param name="width">Ширина картинки</param>
         /// <param name="height">Высота картинки</param>
         /// <returns>true - объект создан, false - проверка не пройдена,
 public bool Init(int speed, double weight, Color bodyColor, Color
-additionalColor, bool bodyKit, bool wing, bool sportLine, int width, int height)
+additionalColor, bool racket, bool wing, int width, int height)
         {
             // TODO: Продумать проверки
             _pictureWidth = width;
             _pictureHeight = height;
-            EntityAirFighter = new EntitySportCar();
+            EntityAirFighter = new EntityAirFighter();
             EntityAirFighter.Init(speed, weight, bodyColor, additionalColor,
-            bodyKit, wing, sportLine);
+            racket, wing);
             return true;
         }
         /// <summary>
@@ -123,7 +123,7 @@ additionalColor, bool bodyKit, bool wing, bool sportLine, int width, int height)
             Brush additionalBrush = new
             SolidBrush(EntityAirFighter.AdditionalColor);
             // обвесы
-            if (EntityAirFighter.BodyKit)
+            if (EntityAirFighter.Racket)
             {
                 g.DrawEllipse(pen, _startPosX + 90, _startPosY, 20, 20);
                 g.DrawEllipse(pen, _startPosX + 90, _startPosY + 40, 20,
@@ -215,16 +215,8 @@ Brush brBlue = new SolidBrush(Color.LightBlue);
             30);
             g.DrawRectangle(pen, _startPosX + 10, _startPosY + 15, 15,
             30);
-            // спортивная линия
-            if (EntityAirFighter.SportLine)
-            {
-                g.FillRectangle(additionalBrush, _startPosX + 75,
-                _startPosY + 23, 25, 15);
-                g.FillRectangle(additionalBrush, _startPosX + 35,
-                _startPosY + 23, 35, 15);
-                g.FillRectangle(additionalBrush, _startPosX + 10,
-                _startPosY + 23, 20, 15);
-            }
+
+           
             // крыло
             if (EntityAirFighter.Wing)
             {
