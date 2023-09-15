@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirFighter
+namespace ProjectAirFighter
 {
-    public class DrawingAirFighter
+    public class DrawningAirFighter
     {
         /// <summary>
         /// Класс-сущность
@@ -20,11 +22,11 @@ namespace AirFighter
         /// Высота окна
         /// </summary>
         private int _pictureHeight;
-/// <summary>
+        /// <summary>
 
-/// Левая координата прорисовки автомобиля
-/// </summary>
-private int _startPosX;
+        /// Левая координата прорисовки автомобиля
+        /// </summary>
+        private int _startPosX;
         /// <summary>
         /// Верхняя кооридната прорисовки автомобиля
         /// </summary>
@@ -32,11 +34,11 @@ private int _startPosX;
         /// <summary>
         /// Ширина прорисовки автомобиля
         /// </summary>
-        private readonly int _carWidth = 110;
+        private readonly int _airfighterWidth = 174;
         /// <summary>
         /// Высота прорисовки автомобиля
         /// </summary>
-        private readonly int _carHeight = 60;
+        private readonly int _airfighterHeight = 140;
         /// <summary>
         /// Инициализация свойств
         /// </summary>
@@ -46,12 +48,12 @@ private int _startPosX;
         /// <param name="additionalColor">Дополнительный цвет</param>
         /// <param name="racket">Признак наличия обвеса</param>
         /// <param name="wing">Признак наличия антикрыла</param>
-      
+
         /// <param name="width">Ширина картинки</param>
         /// <param name="height">Высота картинки</param>
         /// <returns>true - объект создан, false - проверка не пройдена,
-public bool Init(int speed, double weight, Color bodyColor, Color
-additionalColor, bool racket, bool wing, int width, int height)
+        public bool Init(int speed, double weight, Color bodyColor, Color
+        additionalColor, bool racket, bool wing, int width, int height)
         {
             // TODO: Продумать проверки
             _pictureWidth = width;
@@ -79,8 +81,8 @@ additionalColor, bool racket, bool wing, int width, int height)
         public void MoveTransport(DirectionType direction)
         {
             if (EntityAirFighter == null)
-                
-        {
+
+            {
                 return;
             }
             switch (direction)
@@ -94,19 +96,26 @@ additionalColor, bool racket, bool wing, int width, int height)
                     break;
                 //вверх
                 case DirectionType.Up:
-                    if (_startPosY - EntityAirFighter.Step > 0)
+                    if (_startPosY - 64 - EntityAirFighter.Step > 0)
                     {
                         _startPosY -= (int)EntityAirFighter.Step;
                     }
                     break;
                 // вправо
                 case DirectionType.Right:
-                    // TODO: Продумать логику
+                    if (_startPosX + EntityAirFighter.Step + _airfighterWidth < 900)
+                    {
+                        _startPosX += (int)EntityAirFighter.Step;
+                    }
                     break;
                 //вниз
                 case DirectionType.Down:
-                    // TODO: Продумать логику
+                    if (_startPosY + EntityAirFighter.Step + _airfighterHeight < 500)
+                    {
+                        _startPosY += (int)EntityAirFighter.Step;
+                    }
                     break;
+
             }
         }
         /// <summary>
@@ -122,108 +131,166 @@ additionalColor, bool racket, bool wing, int width, int height)
             Pen pen = new(Color.Black);
             Brush additionalBrush = new
             SolidBrush(EntityAirFighter.AdditionalColor);
-            // обвесы
+            // ракеты
             if (EntityAirFighter.Racket)
             {
-                g.DrawEllipse(pen, _startPosX + 90, _startPosY, 20, 20);
-                g.DrawEllipse(pen, _startPosX + 90, _startPosY + 40, 20,
-                20);
-                g.DrawRectangle(pen, _startPosX + 90, _startPosY + 10,
-                20, 40);
-                g.DrawRectangle(pen, _startPosX + 90, _startPosY, 15,
-                15);
-                g.DrawRectangle(pen, _startPosX + 90, _startPosY + 45,
-                15, 15);
-                g.FillEllipse(additionalBrush, _startPosX + 90,
-                _startPosY, 20, 20);
-                g.FillEllipse(additionalBrush, _startPosX + 90,
-                _startPosY + 40, 20, 20);
-                g.FillRectangle(additionalBrush, _startPosX + 90,
-                _startPosY + 10, 20, 40);
                 
-            g.FillRectangle(additionalBrush, _startPosX + 90,
-            _startPosY + 1, 15, 15);
-                g.FillRectangle(additionalBrush, _startPosX + 90,
-                _startPosY + 45, 15, 15);
-                g.DrawEllipse(pen, _startPosX, _startPosY, 20, 20);
-                g.DrawEllipse(pen, _startPosX, _startPosY + 40, 20, 20);
-                g.DrawRectangle(pen, _startPosX, _startPosY + 10, 20,
-                40);
-                g.DrawRectangle(pen, _startPosX + 5, _startPosY, 14,
-                15);
-                g.DrawRectangle(pen, _startPosX + 5, _startPosY + 45,
-                14, 15);
-                g.FillEllipse(additionalBrush, _startPosX, _startPosY,
-                20, 20);
-                g.FillEllipse(additionalBrush, _startPosX, _startPosY +
-                40, 20, 20);
-                g.FillRectangle(additionalBrush, _startPosX + 1,
-                _startPosY + 10, 25, 40);
-                g.FillRectangle(additionalBrush, _startPosX + 5,
-                _startPosY + 1, 15, 15);
-                g.FillRectangle(additionalBrush, _startPosX + 5,
-                _startPosY + 45, 15, 15);
-                g.DrawRectangle(pen, _startPosX + 35, _startPosY, 39,
-                15);
-                g.DrawRectangle(pen, _startPosX + 35, _startPosY + 45,
-                39, 15);
-                g.FillRectangle(additionalBrush, _startPosX + 35,
-                _startPosY + 1, 40, 15);
-                g.FillRectangle(additionalBrush, _startPosX + 35,
-                _startPosY + 45, 40, 15);
-            }
-            //границы автомобиля
-            g.DrawEllipse(pen, _startPosX + 10, _startPosY + 5, 20, 20);
-            g.DrawEllipse(pen, _startPosX + 10, _startPosY + 35, 20, 20);
-            g.DrawEllipse(pen, _startPosX + 80, _startPosY + 5, 20, 20);
-            g.DrawEllipse(pen, _startPosX + 80, _startPosY + 35, 20, 20);
-            g.DrawRectangle(pen, _startPosX + 9, _startPosY + 15, 10, 30);
-            g.DrawRectangle(pen, _startPosX + 90, _startPosY + 15, 10,
-            30);
-            g.DrawRectangle(pen, _startPosX + 20, _startPosY + 4, 70, 52);
-            //задние фары
+                 Brush brGrey = new SolidBrush(Color.LightGray);
+                g.FillRectangle(brGrey, _startPosX + 70, _startPosY -15, 10, 10);
+               g.DrawRectangle(pen, _startPosX + 70, _startPosY -15, 10, 10);
+                Point[] noseracketPoints =
+            {
+                new Point(_startPosX + 70, _startPosY -5),
+                new Point(_startPosX + 70, _startPosY - 15),
+                new Point(_startPosX + 60,_startPosY -10)
+            };
             Brush brRed = new SolidBrush(Color.Red);
-            g.FillEllipse(brRed, _startPosX + 10, _startPosY + 5, 20, 20);
-            g.FillEllipse(brRed, _startPosX + 10, _startPosY + 35, 20,
-            20);
-            //передние фары
-            Brush brYellow = new SolidBrush(Color.Yellow);
-            g.FillEllipse(brYellow, _startPosX + 80, _startPosY + 5, 20,
-            20);
-            g.FillEllipse(brYellow, _startPosX + 80, _startPosY + 35, 20,
-            20);
-            //кузов
-            Brush br = new SolidBrush(EntityAirFighter.BodyColor);
-            g.FillRectangle(br, _startPosX + 10, _startPosY + 15, 10, 30);
-            g.FillRectangle(br, _startPosX + 90, _startPosY + 15, 10, 30);
-            g.FillRectangle(br, _startPosX + 20, _startPosY + 5, 70, 50);
-            
-        //стекла
-Brush brBlue = new SolidBrush(Color.LightBlue);
-            g.FillRectangle(brBlue, _startPosX + 70, _startPosY + 10, 5,
-            40);
-            g.FillRectangle(brBlue, _startPosX + 30, _startPosY + 10, 5,
-            40);
-            g.FillRectangle(brBlue, _startPosX + 35, _startPosY + 8, 35,
-            2);
-            g.FillRectangle(brBlue, _startPosX + 35, _startPosY + 51, 35,
-            2);
-            //выделяем рамкой крышу
-            g.DrawRectangle(pen, _startPosX + 35, _startPosY + 10, 35,
-            40);
-            g.DrawRectangle(pen, _startPosX + 75, _startPosY + 15, 25,
-            30);
-            g.DrawRectangle(pen, _startPosX + 10, _startPosY + 15, 15,
-            30);
+             g.FillPolygon(brRed, noseracketPoints);
+            g.DrawPolygon(pen, noseracketPoints);
+                  
+                 g.FillRectangle(brGrey, _startPosX + 70, _startPosY -40, 10, 10);
+               g.DrawRectangle(pen, _startPosX + 70, _startPosY -40, 10, 10);
+                Point[] noseracketPoints2 =
+            {
+                new Point(_startPosX + 70, _startPosY -30),
+                new Point(_startPosX + 70, _startPosY - 40),
+                new Point(_startPosX + 60,_startPosY -35)
+            };
 
+             g.FillPolygon(brRed, noseracketPoints2);
+            g.DrawPolygon(pen, noseracketPoints2);
+                g.FillPolygon(brRed, noseracketPoints);
+            g.DrawPolygon(pen, noseracketPoints);
+                  
+                 g.FillRectangle(brGrey, _startPosX + 70, _startPosY + 59, 10, 10);
+               g.DrawRectangle(pen, _startPosX + 70, _startPosY +59, 10, 10);
+                Point[] noseracketPoints3 =
+            {
+                new Point(_startPosX + 70, _startPosY +59),
+                new Point(_startPosX + 70, _startPosY + 69),
+                new Point(_startPosX + 60,_startPosY + 64)
+            };
+
+             g.FillPolygon(brRed, noseracketPoints3);
+            g.DrawPolygon(pen, noseracketPoints3);
+
+
+                  g.FillRectangle(brGrey, _startPosX + 70, _startPosY + 34, 10, 10);
+               g.DrawRectangle(pen, _startPosX + 70, _startPosY +34, 10, 10);
+                Point[] noseracketPoints4 =
+            {
+                new Point(_startPosX + 70, _startPosY +34),
+                new Point(_startPosX + 70, _startPosY + 44),
+                new Point(_startPosX + 60,_startPosY + 39)
+            };
+
+             g.FillPolygon(brRed, noseracketPoints4);
+            g.DrawPolygon(pen, noseracketPoints4);
+
+            }
+
+
+
+
+            Point[] nosePoints =
+            {
+                new Point(_startPosX + 20, _startPosY + 4),
+                new Point(_startPosX + 20, _startPosY + 24),
+                new Point(_startPosX,_startPosY + 13)
+            };
+            Brush brBlack = new SolidBrush(Color.Black);
+             g.FillPolygon(brBlack, nosePoints);
+            g.DrawPolygon(pen, nosePoints);
            
+            Point[] rightwingPoints =
+          {
+                new Point(_startPosX + 80, _startPosY + 4),
+                new Point(_startPosX+80,_startPosY - 64),
+                new Point(_startPosX+85,_startPosY - 64),
+                new Point(_startPosX + 100, _startPosY + 4)
+
+
+
+            };
+              g.FillPolygon(additionalBrush, rightwingPoints);
+            g.DrawPolygon(pen, rightwingPoints);
+          
+            Point[] lefttwingPoints =
+           {
+                new Point(_startPosX + 80, _startPosY + 24),
+                new Point(_startPosX + 100, _startPosY + 24),
+                 new Point(_startPosX+85,_startPosY + 94),
+                new Point(_startPosX+80,_startPosY + 94)
+
+            };
+                    g.FillPolygon(additionalBrush, lefttwingPoints);
+            g.DrawPolygon(pen, lefttwingPoints);
+    
+
+            Point[] leftenginePoints =
+            {
+                new Point(_startPosX + 140, _startPosY + 24),
+                new Point(_startPosX + 160, _startPosY + 24),
+                new Point(_startPosX+160,_startPosY + 50),
+                new Point(_startPosX+140,_startPosY + 32)
+
+
+
+
+            };
+             g.FillPolygon(additionalBrush, leftenginePoints);
+            g.DrawPolygon(pen, leftenginePoints);
+           
+
+
+            Point[] rightenginePoints =
+           {
+                new Point(_startPosX + 140, _startPosY + 24),
+                new Point(_startPosX + 160, _startPosY + 24),
+                new Point(_startPosX+160,_startPosY - 16),
+                new Point(_startPosX+140,_startPosY -4)
+
+
+
+
+            };
+             g.FillPolygon(additionalBrush, rightenginePoints);
+            g.DrawPolygon(pen, rightenginePoints);
+           
+             g.FillRectangle(additionalBrush, _startPosX + 20, _startPosY + 4, 140, 20);
+            g.DrawRectangle(pen, _startPosX + 20, _startPosY + 4, 140, 20);
+           
+
+
+
             // крыло
             if (EntityAirFighter.Wing)
             {
-                g.FillRectangle(additionalBrush, _startPosX, _startPosY
-                + 5, 10, 50);
-                g.DrawRectangle(pen, _startPosX, _startPosY + 5, 10,
-                50);
+                Point[] doprightwingPoints =
+           {
+                new Point(_startPosX + 30, _startPosY + 4),
+                new Point(_startPosX+30,_startPosY - 34),
+                new Point(_startPosX+35,_startPosY - 34),
+                new Point(_startPosX + 45, _startPosY + 4)
+
+
+
+            };
+                  g.FillPolygon(additionalBrush, doprightwingPoints);
+                g.DrawPolygon(pen, doprightwingPoints);
+              
+                Point[] doplefttwingPoints =
+         {
+                new Point(_startPosX + 30, _startPosY + 24),
+                new Point(_startPosX + 30, _startPosY + 59),
+                 new Point(_startPosX+35,_startPosY + 59),
+                new Point(_startPosX+45,_startPosY + 24)
+
+            };
+                  g.FillPolygon(additionalBrush, doplefttwingPoints);
+                g.DrawPolygon(pen, doplefttwingPoints);
+              
+
             }
         }
     }

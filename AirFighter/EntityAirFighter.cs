@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirFighter
+namespace ProjectAirFighter
 {
     public class EntityAirFighter
     {

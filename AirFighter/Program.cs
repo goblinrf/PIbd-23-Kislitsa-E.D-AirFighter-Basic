@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace AirFighter
+namespace ProjectAirFighter
 {
     internal static class Program
     {
@@ -12,10 +12,10 @@ namespace AirFighter
         {
             // To customize application configuration such as set high DPI
 
- // see https://aka.ms/applicationconfiguration.
  ApplicationConfiguration.Initialize();
             Application.Run(new FormAirFighter());
         }
     }
+
 
 }
