@@ -14,6 +14,7 @@ namespace ProjectAirFighter
     {
 
         private DrawningAirFighter? _drawningAirFighter;
+
         public FormAirFighter()
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace ProjectAirFighter
         {
             Random random = new();
             _drawningAirFighter = new DrawningAirFighter();
+
             _drawningAirFighter.Init(random.Next(100, 300),
             random.Next(1000, 3000),
             Color.FromArgb(random.Next(0, 256), random.Next(0, 256),

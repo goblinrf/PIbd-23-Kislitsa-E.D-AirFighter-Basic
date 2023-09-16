@@ -56,6 +56,8 @@ namespace ProjectAirFighter
         additionalColor, bool racket, bool wing, int width, int height)
         {
             // TODO: Продумать проверки
+            if (width <= _airfighterWidth || height <= _airfighterHeight)
+                return false;
             _pictureWidth = width;
             _pictureHeight = height;
             EntityAirFighter = new EntityAirFighter();
@@ -73,6 +75,11 @@ namespace ProjectAirFighter
             // TODO: Изменение x, y
             _startPosX = x;
             _startPosY = y;
+            if (x + _airfighterWidth >= _pictureWidth || y + _airfighterHeight >= _pictureHeight)
+            {
+                _startPosX = 1;
+                _startPosY = _airfighterHeight/2;
+            }
         }
         /// <summary>
         /// Изменение направления перемещения
@@ -134,22 +141,22 @@ namespace ProjectAirFighter
             // ракеты
             if (EntityAirFighter.Racket)
             {
-                
-                 Brush brGrey = new SolidBrush(Color.LightGray);
-                g.FillRectangle(brGrey, _startPosX + 70, _startPosY -15, 10, 10);
-               g.DrawRectangle(pen, _startPosX + 70, _startPosY -15, 10, 10);
+
+                Brush brGrey = new SolidBrush(Color.LightGray);
+                g.FillRectangle(brGrey, _startPosX + 70, _startPosY - 15, 10, 10);
+                g.DrawRectangle(pen, _startPosX + 70, _startPosY - 15, 10, 10);
                 Point[] noseracketPoints =
             {
                 new Point(_startPosX + 70, _startPosY -5),
                 new Point(_startPosX + 70, _startPosY - 15),
                 new Point(_startPosX + 60,_startPosY -10)
             };
-            Brush brRed = new SolidBrush(Color.Red);
-             g.FillPolygon(brRed, noseracketPoints);
-            g.DrawPolygon(pen, noseracketPoints);
-                  
-                 g.FillRectangle(brGrey, _startPosX + 70, _startPosY -40, 10, 10);
-               g.DrawRectangle(pen, _startPosX + 70, _startPosY -40, 10, 10);
+                Brush brRed = new SolidBrush(Color.Red);
+                g.FillPolygon(brRed, noseracketPoints);
+                g.DrawPolygon(pen, noseracketPoints);
+
+                g.FillRectangle(brGrey, _startPosX + 70, _startPosY - 40, 10, 10);
+                g.DrawRectangle(pen, _startPosX + 70, _startPosY - 40, 10, 10);
                 Point[] noseracketPoints2 =
             {
                 new Point(_startPosX + 70, _startPosY -30),
@@ -157,13 +164,13 @@ namespace ProjectAirFighter
                 new Point(_startPosX + 60,_startPosY -35)
             };
 
-             g.FillPolygon(brRed, noseracketPoints2);
-            g.DrawPolygon(pen, noseracketPoints2);
+                g.FillPolygon(brRed, noseracketPoints2);
+                g.DrawPolygon(pen, noseracketPoints2);
                 g.FillPolygon(brRed, noseracketPoints);
-            g.DrawPolygon(pen, noseracketPoints);
-                  
-                 g.FillRectangle(brGrey, _startPosX + 70, _startPosY + 59, 10, 10);
-               g.DrawRectangle(pen, _startPosX + 70, _startPosY +59, 10, 10);
+                g.DrawPolygon(pen, noseracketPoints);
+
+                g.FillRectangle(brGrey, _startPosX + 70, _startPosY + 59, 10, 10);
+                g.DrawRectangle(pen, _startPosX + 70, _startPosY + 59, 10, 10);
                 Point[] noseracketPoints3 =
             {
                 new Point(_startPosX + 70, _startPosY +59),
@@ -171,12 +178,12 @@ namespace ProjectAirFighter
                 new Point(_startPosX + 60,_startPosY + 64)
             };
 
-             g.FillPolygon(brRed, noseracketPoints3);
-            g.DrawPolygon(pen, noseracketPoints3);
+                g.FillPolygon(brRed, noseracketPoints3);
+                g.DrawPolygon(pen, noseracketPoints3);
 
 
-                  g.FillRectangle(brGrey, _startPosX + 70, _startPosY + 34, 10, 10);
-               g.DrawRectangle(pen, _startPosX + 70, _startPosY +34, 10, 10);
+                g.FillRectangle(brGrey, _startPosX + 70, _startPosY + 34, 10, 10);
+                g.DrawRectangle(pen, _startPosX + 70, _startPosY + 34, 10, 10);
                 Point[] noseracketPoints4 =
             {
                 new Point(_startPosX + 70, _startPosY +34),
@@ -184,8 +191,8 @@ namespace ProjectAirFighter
                 new Point(_startPosX + 60,_startPosY + 39)
             };
 
-             g.FillPolygon(brRed, noseracketPoints4);
-            g.DrawPolygon(pen, noseracketPoints4);
+                g.FillPolygon(brRed, noseracketPoints4);
+                g.DrawPolygon(pen, noseracketPoints4);
 
             }
 
@@ -199,22 +206,22 @@ namespace ProjectAirFighter
                 new Point(_startPosX,_startPosY + 13)
             };
             Brush brBlack = new SolidBrush(Color.Black);
-             g.FillPolygon(brBlack, nosePoints);
+            g.FillPolygon(brBlack, nosePoints);
             g.DrawPolygon(pen, nosePoints);
-           
+
             Point[] rightwingPoints =
           {
                 new Point(_startPosX + 80, _startPosY + 4),
-                new Point(_startPosX+80,_startPosY - 64),
-                new Point(_startPosX+85,_startPosY - 64),
+                new Point(_startPosX+80,_startPosY - 66),
+                new Point(_startPosX+85,_startPosY - 66),
                 new Point(_startPosX + 100, _startPosY + 4)
 
 
 
             };
-              g.FillPolygon(additionalBrush, rightwingPoints);
+            g.FillPolygon(additionalBrush, rightwingPoints);
             g.DrawPolygon(pen, rightwingPoints);
-          
+
             Point[] lefttwingPoints =
            {
                 new Point(_startPosX + 80, _startPosY + 24),
@@ -223,9 +230,9 @@ namespace ProjectAirFighter
                 new Point(_startPosX+80,_startPosY + 94)
 
             };
-                    g.FillPolygon(additionalBrush, lefttwingPoints);
+            g.FillPolygon(additionalBrush, lefttwingPoints);
             g.DrawPolygon(pen, lefttwingPoints);
-    
+
 
             Point[] leftenginePoints =
             {
@@ -238,9 +245,9 @@ namespace ProjectAirFighter
 
 
             };
-             g.FillPolygon(additionalBrush, leftenginePoints);
+            g.FillPolygon(additionalBrush, leftenginePoints);
             g.DrawPolygon(pen, leftenginePoints);
-           
+
 
 
             Point[] rightenginePoints =
@@ -254,12 +261,12 @@ namespace ProjectAirFighter
 
 
             };
-             g.FillPolygon(additionalBrush, rightenginePoints);
+            g.FillPolygon(additionalBrush, rightenginePoints);
             g.DrawPolygon(pen, rightenginePoints);
-           
-             g.FillRectangle(additionalBrush, _startPosX + 20, _startPosY + 4, 140, 20);
+
+            g.FillRectangle(additionalBrush, _startPosX + 20, _startPosY + 4, 140, 20);
             g.DrawRectangle(pen, _startPosX + 20, _startPosY + 4, 140, 20);
-           
+
 
 
 
@@ -276,9 +283,9 @@ namespace ProjectAirFighter
 
 
             };
-                  g.FillPolygon(additionalBrush, doprightwingPoints);
+                g.FillPolygon(additionalBrush, doprightwingPoints);
                 g.DrawPolygon(pen, doprightwingPoints);
-              
+
                 Point[] doplefttwingPoints =
          {
                 new Point(_startPosX + 30, _startPosY + 24),
@@ -287,9 +294,9 @@ namespace ProjectAirFighter
                 new Point(_startPosX+45,_startPosY + 24)
 
             };
-                  g.FillPolygon(additionalBrush, doplefttwingPoints);
+                g.FillPolygon(additionalBrush, doplefttwingPoints);
                 g.DrawPolygon(pen, doplefttwingPoints);
-              
+
 
             }
         }
