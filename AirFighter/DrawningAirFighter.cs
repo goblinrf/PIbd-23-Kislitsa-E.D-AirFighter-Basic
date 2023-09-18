@@ -110,14 +110,14 @@ namespace ProjectAirFighter
                     break;
                 // вправо
                 case DirectionType.Right:
-                    if (_startPosX + EntityAirFighter.Step + _airfighterWidth < 900)
+                    if (_startPosX + EntityAirFighter.Step + _airfighterWidth < _pictureWidth)
                     {
                         _startPosX += (int)EntityAirFighter.Step;
                     }
                     break;
                 //вниз
                 case DirectionType.Down:
-                    if (_startPosY + EntityAirFighter.Step + _airfighterHeight < 500)
+                    if (_startPosY + EntityAirFighter.Step + _airfighterHeight < _pictureHeight)
                     {
                         _startPosY += (int)EntityAirFighter.Step;
                     }
