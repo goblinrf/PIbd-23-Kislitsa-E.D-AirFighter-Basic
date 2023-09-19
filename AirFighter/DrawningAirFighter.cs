@@ -15,39 +15,41 @@ namespace ProjectAirFighter
         /// </summary>
         public EntityAirFighter? EntityAirFighter { get; private set; }
         /// <summary>
-        /// Ширина окна
+
         /// </summary>
         private int _pictureWidth;
         /// <summary>
-        /// Высота окна
+
         /// </summary>
         private int _pictureHeight;
         /// <summary>
 
-        /// Левая координата прорисовки автомобиля
+
         /// </summary>
         private int _startPosX;
         /// <summary>
-        /// Верхняя кооридната прорисовки автомобиля
+
         /// </summary>
         private int _startPosY;
         /// <summary>
-        /// Ширина прорисовки автомобиля
+
         /// </summary>
-        private readonly int _airfighterWidth = 174;
+        private readonly int _airfighterWidth = 160;
         /// <summary>
-        /// Высота прорисовки автомобиля
+
         /// </summary>
-        private readonly int _airfighterHeight = 140;
+        private readonly int _airfighterHeight = 68;
+
+        private readonly int _airfighterwingkorpusHeight = 90;
         /// <summary>
         /// Инициализация свойств
         /// </summary>
         /// <param name="speed">Скорость</param>
         /// <param name="weight">Вес</param>
-        /// <param name="bodyColor">Цвет кузова</param>
+        /// <param name="bodyColor"></param>
         /// <param name="additionalColor">Дополнительный цвет</param>
-        /// <param name="racket">Признак наличия обвеса</param>
-        /// <param name="wing">Признак наличия антикрыла</param>
+        /// <param name="racket"
+        /// <param name="wing"
 
         /// <param name="width">Ширина картинки</param>
         /// <param name="height">Высота картинки</param>
@@ -78,7 +80,7 @@ namespace ProjectAirFighter
             if (x + _airfighterWidth >= _pictureWidth || y + _airfighterHeight >= _pictureHeight)
             {
                 _startPosX = 1;
-                _startPosY = _airfighterHeight/2;
+                _startPosY = (_airfighterHeight+_airfighterwingkorpusHeight)/2;
             }
         }
         /// <summary>
@@ -100,10 +102,11 @@ namespace ProjectAirFighter
                     {
                         _startPosX -= (int)EntityAirFighter.Step;
                     }
+                   
                     break;
                 //вверх
                 case DirectionType.Up:
-                    if (_startPosY - 64 - EntityAirFighter.Step > 0)
+                    if (_startPosY - _airfighterHeight - EntityAirFighter.Step > 0)
                     {
                         _startPosY -= (int)EntityAirFighter.Step;
                     }
@@ -114,13 +117,19 @@ namespace ProjectAirFighter
                     {
                         _startPosX += (int)EntityAirFighter.Step;
                     }
+                    else
+                        _startPosX = _pictureWidth - _airfighterWidth;
                     break;
                 //вниз
                 case DirectionType.Down:
-                    if (_startPosY + EntityAirFighter.Step + _airfighterHeight < _pictureHeight)
+                    if (_startPosY + EntityAirFighter.Step + _airfighterwingkorpusHeight < _pictureHeight)
                     {
+                     
                         _startPosY += (int)EntityAirFighter.Step;
+
                     }
+                    else
+                        _startPosY = _pictureHeight - _airfighterwingkorpusHeight;
                     break;
 
             }
@@ -203,7 +212,7 @@ namespace ProjectAirFighter
             {
                 new Point(_startPosX + 20, _startPosY + 4),
                 new Point(_startPosX + 20, _startPosY + 24),
-                new Point(_startPosX,_startPosY + 13)
+                new Point(_startPosX-3,_startPosY + 12)
             };
             Brush brBlack = new SolidBrush(Color.Black);
             g.FillPolygon(brBlack, nosePoints);
@@ -212,8 +221,8 @@ namespace ProjectAirFighter
             Point[] rightwingPoints =
           {
                 new Point(_startPosX + 80, _startPosY + 4),
-                new Point(_startPosX+80,_startPosY - 66),
-                new Point(_startPosX+85,_startPosY - 66),
+                new Point(_startPosX+80,_startPosY - 64),
+                new Point(_startPosX+85,_startPosY - 64),
                 new Point(_startPosX + 100, _startPosY + 4)
 
 

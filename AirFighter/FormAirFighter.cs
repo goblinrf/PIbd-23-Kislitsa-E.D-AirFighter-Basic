@@ -48,37 +48,37 @@ namespace ProjectAirFighter
 
             pictureBoxAirFighter.Width, pictureBoxAirFighter.Height);
             _drawningAirFighter.SetPosition(random.Next(10, 100),
-            random.Next(70, 100));
+           random.Next(70, 100));
             Draw();
         }
 
-    
-    private void buttonMove_Click(object sender, EventArgs e)
-    {
-        if (_drawningAirFighter == null)
+
+        private void buttonMove_Click(object sender, EventArgs e)
         {
-            return;
+            if (_drawningAirFighter == null)
+            {
+                return;
+            }
+            string name = ((Button)sender)?.Name ?? string.Empty;
+            switch (name)
+            {
+                case "buttonUp":
+                    _drawningAirFighter.MoveTransport(DirectionType.Up);
+                    break;
+                case "buttonDown":
+                    _drawningAirFighter.MoveTransport(DirectionType.Down);
+                    break;
+                case "buttonLeft":
+                    _drawningAirFighter.MoveTransport(DirectionType.Left);
+                    break;
+                case "buttonRight":
+                    _drawningAirFighter.MoveTransport(DirectionType.Right);
+                    break;
+            }
+            Draw();
         }
-        string name = ((Button)sender)?.Name ?? string.Empty;
-        switch (name)
-        {
-            case "buttonUp":
-                _drawningAirFighter.MoveTransport(DirectionType.Up);
-                break;
-            case "buttonDown":
-                _drawningAirFighter.MoveTransport(DirectionType.Down);
-                break;
-            case "buttonLeft":
-                _drawningAirFighter.MoveTransport(DirectionType.Left);
-                break;
-            case "buttonRight":
-                _drawningAirFighter.MoveTransport(DirectionType.Right);
-                break;
-        }
-        Draw();
     }
-   }
 
 }
-  
+
 

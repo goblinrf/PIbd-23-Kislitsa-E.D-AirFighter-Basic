@@ -29,22 +29,20 @@ namespace ProjectAirFighter
         /// </summary>
         public bool Racket { get; private set; }
         /// <summary>
-        /// Признак (опция) наличия антикрыла
-        /// </summary>
+       
         public bool Wing { get; private set; }
         /// <summary>
-        /// Признак (опция) наличия гоночной полосы
-        /// </summary>
+        
 
         /// <summary>
-        /// Шаг перемещения автомобиля
+        
         /// </summary>
         public double Step => (double)Speed * 100 / Weight;
         /// <summary>
         /// Инициализация полей объекта-класса спортивного автомобиля
         /// </summary>
         /// <param name="speed">Скорость</param>
-        /// <param name="weight">Вес автомобиля</param>
+        /// <param name="weight">
         /// <param name="bodyColor">Основной цвет</param>
         /// <param name="additionalColor">Дополнительный цвет</param>
         /// <param name="racket">Признак наличия обвеса</param>
